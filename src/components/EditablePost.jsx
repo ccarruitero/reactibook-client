@@ -4,25 +4,43 @@ import {
   Select,
   MenuItem,
   Button,
+  Box,
 } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import { isNotEmpty } from '../utils/validation';
 
-const EditablePost = () => {
-  const [values, setValues] = useState({
-    text: '',
-    sharedWith: 'public',
-  })
+const StyledBox = styled(Box) ({
+  width: '50%',
+  margin: 'auto',
+});
+
+const StyledTextarea = styled(TextareaAutosize) ({
+  width: '100%',
+});
+
+const EditablePost = ({ post, btnTxt, placeholder, onSubmit }) => {
+  const initialState = {
+    text: post?.text || '',
+    sharedWith: post?.sharedWith || 'public',
+  };
+  const [values, setValues] = useState(initialState);
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
   }
 
+  const handleSubmit = async (event) => {
+    await onSubmit(values);
+    setValues(initialState);
+  }
+
   return (
-    <div>
-      <TextareaAutosize
-        rowsMin={10}
-        placeholder='What happening?'
+    <StyledBox>
+      <StyledTextarea
+        rowsMin={7}
+        placeholder={placeholder}
         onChange={handleChange('text')}
+        value={values.text}
       />
       <Select
         value={values.sharedWith}
@@ -35,10 +53,11 @@ const EditablePost = () => {
         variant='contained'
         color='primary'
         disabled={isNotEmpty(values.text) ? false : true}
+        onClick={handleSubmit}
       >
-        Publish
+        { btnTxt}
       </Button>
-    </div>
+    </StyledBox>
   );
 };
 

@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import Header from './shared/Header';
-import EditablePost from './EditablePost';
+import NewPost from './NewPost';
 
 const Dashboard = () => {
   return (
@@ -8,7 +8,7 @@ const Dashboard = () => {
       <Header
         title='Dashboard'
       />
-      <EditablePost />
+      <NewPost />
     </Fragment> 
   );
 };
