@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Header from './shared/Header';
 import NewPost from './NewPost';
+import PostList from './PostList';
 
 const Dashboard = () => {
   return (
@@ -9,6 +10,7 @@ const Dashboard = () => {
         title='Dashboard'
       />
       <NewPost />
+      <PostList />
     </Fragment> 
   );
 };

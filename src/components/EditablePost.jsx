@@ -4,21 +4,17 @@ import {
   Select,
   MenuItem,
   Button,
-  Box,
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { isNotEmpty } from '../utils/validation';
-
-const StyledBox = styled(Box) ({
-  width: '50%',
-  margin: 'auto',
-});
+import StyledBox from './shared/StyledBox';
+import AudienceSelect from './shared/AudienceSelect';
 
 const StyledTextarea = styled(TextareaAutosize) ({
   width: '100%',
 });
 
-const EditablePost = ({ post, btnTxt, placeholder, onSubmit }) => {
+const EditablePost = ({ post, btnTxt, placeholder, onSubmit, onCancel }) => {
   const initialState = {
     text: post?.text || '',
     sharedWith: post?.sharedWith || 'public',
@@ -42,13 +38,10 @@ const EditablePost = ({ post, btnTxt, placeholder, onSubmit }) => {
         onChange={handleChange('text')}
         value={values.text}
       />
-      <Select
+      <AudienceSelect
         value={values.sharedWith}
         onChange={handleChange('sharedWith')}
-      >
-        <MenuItem value={'public'}>Public</MenuItem>
-        <MenuItem value={'friends'}>Friends</MenuItem>
-      </Select>
+      />
       <Button
         variant='contained'
         color='primary'
@@ -57,6 +50,15 @@ const EditablePost = ({ post, btnTxt, placeholder, onSubmit }) => {
       >
         { btnTxt}
       </Button>
+      { onCancel &&
+        <Button
+          variant='contained'
+          color='secondary'
+          onClick={onCancel}
+        >
+          Cancel
+        </Button>
+      }
     </StyledBox>
   );
 };
