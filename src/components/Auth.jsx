@@ -36,7 +36,7 @@ const Auth =  ({ children,  history, ...props}) => {
     }
 
     checkToken();
-  }, []);
+  }, [dispatch, history, isAuthenticated]);
 
   return (
     <div>

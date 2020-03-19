@@ -19,7 +19,7 @@ const PostList = () => {
     }
 
     getPosts();
-  }, []);
+  }, [dispatch, token]);
 
   const handleChange = (event) => {
     setFilterBy(event.target.value);
