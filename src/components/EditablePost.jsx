@@ -25,7 +25,9 @@ const EditablePost = ({ post, btnTxt, placeholder, onSubmit, onCancel }) => {
 
   const handleSubmit = async (event) => {
     await onSubmit(values);
-    setValues(initialState);
+    if (!post) {
+      setValues(initialState);
+    }
   }
 
   return (
