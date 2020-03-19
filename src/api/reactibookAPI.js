@@ -23,6 +23,10 @@ export const signUp = async (data) => request({
   path: 'users', method: 'post', data,
 });
 
+export const validateToken = async (token) => request({
+  path: 'auth/introspect', method: 'post', token,
+});
+
 export const createPost = async (data, token) => request({
   path: 'posts', method: 'post', data, token,
 });

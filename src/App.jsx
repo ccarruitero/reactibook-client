@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
-import AuthRoute from './components/AuthRoute';
+import Auth from './components/Auth';
 
 function App() {
   return (
@@ -18,9 +18,11 @@ function App() {
           <Route path='/signup'>
             <SignUp />
           </Route>
-          <AuthRoute path='/'>
-            <Dashboard />
-          </AuthRoute>
+          <Route path='/'>
+            <Auth>
+              <Dashboard />
+            </Auth>
+          </Route>
         </Switch>
       </Router>
     </div>
