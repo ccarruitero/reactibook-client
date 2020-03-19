@@ -1,8 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TextareaAutosize,
-  Select,
-  MenuItem,
   Button,
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
