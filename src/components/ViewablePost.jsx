@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Paper,
   Button,
@@ -11,6 +11,7 @@ import {
   Delete,
 } from '@material-ui/icons';
 import { styled } from '@material-ui/core/styles';
+import ConfirmDelete from './ConfirmDelete';
 
 const StyledPaper = styled(Paper) ({
   margin: '5px 0',
@@ -23,6 +24,17 @@ const Heading = styled(Typography) ({
 });
 
 const ViewablePost = ({ post, onEdit, onDelete }) => {
+  const [isConfirm, setIsConfirm] = useState(false);
+
+  const toggleConfirm = () => {
+    setIsConfirm(!isConfirm);
+  }
+
+  const handleConfirm = async () => {
+    toggleConfirm();
+    await onDelete();
+  }
+
   return (
     <StyledBox>
       <StyledPaper elevation={3}>
@@ -43,12 +55,17 @@ const ViewablePost = ({ post, onEdit, onDelete }) => {
             variant='contained'
             color='secondary'
             startIcon={<Delete />}
-            onClick={onDelete}
+            onClick={toggleConfirm}
           >
             Delete
           </Button>
         </Box>
       </StyledPaper>
+      <ConfirmDelete
+        isOpen={isConfirm}
+        onClose={toggleConfirm}
+        onConfirm={handleConfirm}
+      />
     </StyledBox>
   );
 };
